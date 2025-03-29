@@ -1,0 +1,25 @@
+services:
+  laravel-php-apache-environment:
+    build: .
+    networks:
+      - mynetwork
+    volumes:
+      - ./doc-root:/var/www/html/
+    ports:
+      - 8090:80
+
+  mysql:
+    image: mysql:8.0 # MySQL 8 image
+    environment:
+      MYSQL_ROOT_PASSWORD: root  # Root password for MySQL
+      MYSQL_DATABASE: laravel            # Default database
+      MYSQL_USER: laravel              # MySQL user
+      MYSQL_PASSWORD: b5cm0lhfPm31 # MySQL user password
+    networks:
+      - mynetwork
+    volumes:
+      - ./mysql_data/:/var/lib/mysql            # Persist MySQL data
+
+networks:
+  mynetwork:
+    driver: bridge
